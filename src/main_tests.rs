@@ -52,4 +52,25 @@ mod tests {
         // Step 5: Clean up the temporary directory.
         dir.close().unwrap();
     }
+
+    #[test]
+    fn test_check() {
+        // Step 1: Create a temporary directory and a file in it with specific content.
+        let dir = tempdir().unwrap();
+        let file_path = dir.path().join("test_file.txt");
+        let mut file = File::create(&file_path).unwrap();
+        let contents = "Unknown hex: #ffffff #4a1555 | Pink and green: #f5bde6 #a6da95";
+        let flavor_name = detect_flavor(&contents).unwrap();
+        writeln!(file, "{}", &contents).unwrap();
+
+        // Step 2: Call the `check` function with the path to the created file.
+        let unknown_colors = check(&contents, flavor_name);
+
+        // Step 3: Check that the expected unknown colors were detected.
+        let expected_unknown_colors = vec!["#ffffff", "#4a1555"];
+        assert_eq!(unknown_colors, expected_unknown_colors);
+
+        // Step 4: Clean up the temporary directory.
+        dir.close().unwrap();
+    }
 }

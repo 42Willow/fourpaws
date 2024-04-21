@@ -81,7 +81,7 @@ fn convert_files(files: Vec<PathBuf>) {
                         flavor
                     );
                     convert(&file, &contents, flavor);
-                    check(&contents, flavor)
+                    check(&contents, flavor);
                 },
                 None => println!("No flavor detected"),
             }
@@ -167,7 +167,7 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
     }
 }
 
-fn check(contents: &str, flavorname: catppuccin::FlavorName) {
+fn check(contents: &str, flavorname: catppuccin::FlavorName) -> Vec<String> {
     // Get all hex codes in `contents` of type hex
     let hex_codes: Vec<String> = contents
         .split_whitespace()
@@ -175,7 +175,9 @@ fn check(contents: &str, flavorname: catppuccin::FlavorName) {
         .map(|word| word.to_string())
         .collect();
     dbg!(&hex_codes);
-    // Assuming `hex_codes` is a Vec<String> containing all hex codes in `new_contents`
+
+    let mut unknown_colors = Vec::new();
+
     for hex_code in hex_codes {
         let flavor_colors = PALETTE.get_flavor(flavorname).colors;
         if !flavor_colors.iter().any(|color| color.hex.to_string() == hex_code) {
@@ -184,8 +186,11 @@ fn check(contents: &str, flavorname: catppuccin::FlavorName) {
                 ansi_term::Colour::Red.paint("Warning:"),
                 hex_code
             );
+            unknown_colors.push(hex_code);
         }
     }
+
+    unknown_colors
 }
 
 #[cfg(test)]
