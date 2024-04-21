@@ -6,9 +6,9 @@
 </h3>
 
 <p align="center">
-	<a href="https://github.com/catppuccin/42willow/stargazers"><img src="https://img.shields.io/github/stars/catppuccin/42willow?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-	<a href="https://github.com/catppuccin/42willow/issues"><img src="https://img.shields.io/github/issues/catppuccin/42willow?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
-	<a href="https://github.com/catppuccin/42willow/contributors"><img src="https://img.shields.io/github/contributors/catppuccin/42willow?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
+	<a href="https://github.com/42willow/fourpaws/stargazers"><img src="https://img.shields.io/github/stars/42willow/fourpaws?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+	<a href="https://github.com/42willow/fourpaws/issues"><img src="https://img.shields.io/github/issues/42willow/fourpaws?colorA=363a4f&colorB=f5a97f&style=for-the-badge"></a>
+	<a href="https://github.com/42willow/fourpaws/contributors"><img src="https://img.shields.io/github/contributors/42willow/fourpaws?colorA=363a4f&colorB=a6da95&style=for-the-badge"></a>
 </p>
 
 <p align="center">
