@@ -4,6 +4,7 @@ use std::io;
 use std::fs;
 use std::env;
 use std::path::PathBuf;
+use regex::Regex;
 
 const fn ansi(color: &catppuccin::Color) -> ansi_term::Colour {
     ansi_term::Colour::RGB(color.rgb.r, color.rgb.g, color.rgb.b)
@@ -112,7 +113,7 @@ fn detect_flavor(contents: &str) -> Option<catppuccin::FlavorName> {
 }
 
 fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
-    dbg!(&contents);
+    // dbg!(&contents);
     for flavor in &PALETTE {
         let mut new_contents = contents.to_string();
         if flavor.name == flavorname {
@@ -125,6 +126,7 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
         
         for c in flavor.colors.iter() {
             let equiv_color = PALETTE.get_flavor(flavorname).colors[c.name];
+            let re = Regex::new(&format!(r"(?i){}", equiv_color.hex.to_string())).unwrap();
             if new_contents.to_lowercase().contains(&equiv_color.hex.to_string()) {
                 println!(
                     "{} → {} | {} → {} ({})",
@@ -134,7 +136,7 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
                     c.hex.to_string(),
                     c.name,
                 );
-                new_contents = new_contents.replace(&equiv_color.hex.to_string(), &c.hex.to_string());
+                new_contents = re.replace_all(&new_contents, c.hex.to_string()).to_string();
             }
         }
         dbg!(&new_contents);
@@ -172,7 +174,7 @@ fn check(contents: &str, flavorname: catppuccin::FlavorName) -> Vec<String> {
     let hex_codes: Vec<String> = contents
         .split_whitespace()
         .filter(|word| word.starts_with("#"))
-        .map(|word| word.to_string())
+        .map(|word| word.to_string().to_lowercase())
         .collect();
     dbg!(&hex_codes);
 

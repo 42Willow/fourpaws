@@ -12,7 +12,7 @@ mod tests {
         let dir = tempdir().unwrap();
         let file_path = dir.path().join("test_file.txt");
         let mut file = File::create(&file_path).unwrap();
-        let contents = "Unknown hex: #ffffff | Pink and green: #f5bde6 #a6da95";
+        let contents = "Unknown hex: #ffffff | Pink and green: #f5bdE6 #A6DA95";
         let flavor_name = detect_flavor(&contents).unwrap();
         writeln!(file, "{}", &contents).unwrap();
 
@@ -59,7 +59,7 @@ mod tests {
         let dir = tempdir().unwrap();
         let file_path = dir.path().join("test_file.txt");
         let mut file = File::create(&file_path).unwrap();
-        let contents = "Unknown hex: #ffffff #4a1555 | Pink and green: #f5bde6 #a6da95";
+        let contents = "Unknown hex: #ffffff #4A1555 | Pink and green: #f5bdE6 #a6Da95";
         let flavor_name = detect_flavor(&contents).unwrap();
         writeln!(file, "{}", &contents).unwrap();
 
