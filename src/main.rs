@@ -5,7 +5,6 @@ use std::fs;
 use std::env;
 use std::path::PathBuf;
 use regex::Regex;
-use unidecode::unidecode;
 
 const fn ansi(color: &catppuccin::Color) -> ansi_term::Colour {
     ansi_term::Colour::RGB(color.rgb.r, color.rgb.g, color.rgb.b)
@@ -146,14 +145,14 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
         let new_name = if let Some(extension) = path.extension() {
             format!(
                 "../{}/{}.{}",
-                unidecode(&flavor.name.to_string()).to_string().to_lowercase(),
+                &flavor.name.identifier(),
                 path.file_stem().unwrap().to_str().unwrap(),
                 extension.to_str().unwrap()
             )
         } else {
             format!(
                 "../{}/{}",
-                unidecode(&flavor.name.to_string()).to_string().to_lowercase(),
+                &flavor.name.identifier(),
                 path.file_stem().unwrap().to_str().unwrap()
             )
         };

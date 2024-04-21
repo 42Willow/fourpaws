@@ -26,7 +26,7 @@ mod tests {
             }
             let expected_path = file_path.with_file_name(format!(
                 "../{}/test_file",
-                unidecode(&flavor.name.to_string()).to_string().to_lowercase()
+                &flavor.name.identifier()
             ));
             assert!(expected_path.exists(), "File {} was not created", expected_path.display());
         }
@@ -38,7 +38,7 @@ mod tests {
             }
             let expected_path = file_path.with_file_name(format!(
                 "../{}/test_file",
-                unidecode(&flavor.name.to_string()).to_string().to_lowercase()
+                &flavor.name.identifier()
             ));
             let expected_contents = format!(
                 "Unknown hex: #ffffff | Pink and green: {} {}\n",
