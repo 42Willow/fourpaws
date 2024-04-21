@@ -17,7 +17,7 @@
 
 A tool for converting hex codes of one flavor in a file to the three other flavors.
 
-> ![NOTE]
+> [!NOTE]
 > This is my first rust project, it only works with hex codes, and it's not perfect.
 
 <!-- ## Usage
