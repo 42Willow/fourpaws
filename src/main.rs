@@ -139,7 +139,7 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
                 new_contents = re.replace_all(&new_contents, c.hex.to_string()).to_string();
             }
         }
-        dbg!(&new_contents);
+        // dbg!(&new_contents);
 
         // write new contents to file
         let new_name = format!(
@@ -176,7 +176,7 @@ fn check(contents: &str, flavorname: catppuccin::FlavorName) -> Vec<String> {
         .filter(|word| word.starts_with("#"))
         .map(|word| word.to_string().to_lowercase())
         .collect();
-    dbg!(&hex_codes);
+    // dbg!(&hex_codes);
 
     let mut unknown_colors = Vec::new();
 
