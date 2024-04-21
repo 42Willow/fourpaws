@@ -10,7 +10,7 @@ mod tests {
     fn test_convert_files() {
         // Step 1: Create a temporary directory and a file in it with specific content.
         let dir = tempdir().unwrap();
-        let file_path = dir.path().join("test_file.txt");
+        let file_path = dir.path().join("test_file");
         let mut file = File::create(&file_path).unwrap();
         let contents = "Unknown hex: #ffffff | Pink and green: #f5bdE6 #A6DA95";
         let flavor_name = detect_flavor(&contents).unwrap();
@@ -25,8 +25,8 @@ mod tests {
                 continue;
             }
             let expected_path = file_path.with_file_name(format!(
-                "../{}/test_file.txt",
-                flavor.name.to_string().to_lowercase()
+                "../{}/test_file",
+                unidecode(&flavor.name.to_string()).to_string().to_lowercase()
             ));
             assert!(expected_path.exists(), "File {} was not created", expected_path.display());
         }
@@ -37,8 +37,8 @@ mod tests {
                 continue;
             }
             let expected_path = file_path.with_file_name(format!(
-                "../{}/test_file.txt",
-                flavor.name.to_string().to_lowercase()
+                "../{}/test_file",
+                unidecode(&flavor.name.to_string()).to_string().to_lowercase()
             ));
             let expected_contents = format!(
                 "Unknown hex: #ffffff | Pink and green: {} {}\n",

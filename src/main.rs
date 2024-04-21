@@ -5,6 +5,7 @@ use std::fs;
 use std::env;
 use std::path::PathBuf;
 use regex::Regex;
+use unidecode::unidecode;
 
 const fn ansi(color: &catppuccin::Color) -> ansi_term::Colour {
     ansi_term::Colour::RGB(color.rgb.r, color.rgb.g, color.rgb.b)
@@ -142,12 +143,20 @@ fn convert(path: &PathBuf, contents: &str, flavorname: catppuccin::FlavorName) {
         // dbg!(&new_contents);
 
         // write new contents to file
-        let new_name = format!(
-            "../{}/{}.{}",
-            flavor.name.to_string().to_lowercase(),
-            path.file_stem().unwrap().to_str().unwrap(),
-            path.extension().unwrap().to_str().unwrap()
-        );
+        let new_name = if let Some(extension) = path.extension() {
+            format!(
+                "../{}/{}.{}",
+                unidecode(&flavor.name.to_string()).to_string().to_lowercase(),
+                path.file_stem().unwrap().to_str().unwrap(),
+                extension.to_str().unwrap()
+            )
+        } else {
+            format!(
+                "../{}/{}",
+                unidecode(&flavor.name.to_string()).to_string().to_lowercase(),
+                path.file_stem().unwrap().to_str().unwrap()
+            )
+        };
         let new_path = path.with_file_name(new_name);
 
         let new_dir = new_path.parent().unwrap();
