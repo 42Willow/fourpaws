@@ -2,7 +2,11 @@
 name = "fourpaws"
 license = "MIT"
 version = "0.1.0"
+authors = ["Willow <42willow@pm.me>"]
 edition = "2021"
+description = " 🧰 A soothing pastel tool for converting to different catppuccin flavors"
+repository = "https://github.com/42Willow/fourpaws"
+keywords = ["catppuccin"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
